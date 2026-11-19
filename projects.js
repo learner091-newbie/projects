@@ -4,6 +4,7 @@
   Each branch may hold multiple projects or work. Unoccupied branches
   display only the tree artwork: no placeholders or empty project cards.
   Use MANAGE TREE on the website, then Export projects.js to publish edits.
+  Each project can also include a live URL, a repository URL, and a code excerpt.
 */
 window.SD8_CONFIG = {
   ownerLogin: 'learner091-newbie',
@@ -20,7 +21,9 @@ window.SD8_CONFIG = {
       description: 'A platform connecting blood donors with people in need, with donor accounts, administration and a PostgreSQL backend.',
       tags: ['PHP', 'PostgreSQL', 'Bootstrap'],
       repoUrl: '',
-      liveUrl: ''
+      liveUrl: '',
+      codeLanguage: 'Text',
+      codePreview: ''
     },
     {
       id: 'rai-real-estate',
@@ -33,7 +36,9 @@ window.SD8_CONFIG = {
       description: 'A mobile-first property listing website with property search filters, enquiries, an owner dashboard and a chatbot.',
       tags: ['React', 'TypeScript', 'Supabase'],
       repoUrl: '',
-      liveUrl: ''
+      liveUrl: '',
+      codeLanguage: 'Text',
+      codePreview: ''
     }
   ]
 };

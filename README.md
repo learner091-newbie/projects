@@ -1,4 +1,4 @@
-# SD8 Cyber Energy Tree — Final Six-Branch Edition (v4)
+# SD8 Cyber Energy Tree — Six-Branch Edition with Project Links & Code Previews (v5)
 
 This is the **six-branch** version of your interactive SD8 GitHub Pages portfolio. The same neon tree artwork and metallic SD8 logo are retained. Magenta electricity travels upward from the logo through six flowing paths.
 
@@ -77,5 +77,28 @@ This version can load previous local project edits from version 3 in the same br
 - **Why do I still see six energy routes?** The six powered branches always exist. Project badges appear only after you add actual work.
 - **Why don't others see my new entry?** Export `projects.js` and commit the file to GitHub; browser-only saves are private.
 - **Why does the old tree display?** Check that the correct files were uploaded, allow the GitHub Pages deployment to complete, and hard-refresh the browser.
+
+## Finished project links and code previews (new in v5)
+
+Each **published project box** now reserves two link slots and one code-preview section:
+
+- **Finished project URL** (`liveUrl`): a clickable **OPEN WEBSITE** link when entered. Leave blank until the project is deployed.
+- **Source code URL** (`repoUrl`): a clickable **VIEW REPOSITORY** link when entered. Leave blank for private repositories you don't want to share.
+- **Code preview** (`codePreview`): a short plaintext code excerpt visitors can view and optionally copy. Choose the `codeLanguage` from the editor. Code is displayed as text, not executed. The preview supports up to 6,000 characters and scrolls for longer snippets.
+
+To edit these fields, open **+ MANAGE TREE**, select the relevant project, and find the new **PUBLIC LINKS & CODE PREVIEW** form section. Save your edits, click **EXPORT projects.js FOR GITHUB**, and upload the exported `projects.js` to your repository. Exporting is still required because GitHub Pages is static.
+
+Projects without URLs or snippets show muted reserved slots in the public boxes, not broken links. Empty tree branches still have **no** project cards or labels.
+
+**Privacy warning:** Never paste passwords, secret tokens, database credentials, `.env` content, or private source code into a public code preview. If you want the Blood Donor Finder repository to remain private, keep its source code URL empty.
+
+The optional fields can also be edited directly inside each project in `projects.js`:
+
+```js
+liveUrl: 'https://your-demo.example',
+repoUrl: 'https://github.com/your-name/public-repo',
+codeLanguage: 'PHP',
+codePreview: `<?php echo "Hello, world!"; ?>`
+```
 
 No private project source code is bundled in this public portfolio. All portfolio text can be edited using the website editor.

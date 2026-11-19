@@ -60,7 +60,7 @@
           <div class="floating-label fl-a" aria-hidden="true">DATA STREAM : 0x8F</div>
           <div class="floating-label fl-b" aria-hidden="true">GROWTH PROTOCOL ACTIVE</div>
         </div>
-        <div class="visual-footer"><span>◉ SIGNAL ROUTED FROM SD8 CORE</span><span>NEON TREE // V4.0</span></div>
+        <div class="visual-footer"><span>◉ SIGNAL ROUTED FROM SD8 CORE</span><span>NEON TREE // V5.0</span></div>
       </section>
 
       <aside class="details-panel" id="inspector" aria-live="polite">
@@ -71,7 +71,7 @@
     </div>
 
     <section class="directory" id="directory" aria-labelledby="directory-title">
-      <div class="directory-header"><div><p class="section-eyebrow">// CANOPY DIRECTORY</p><h2 id="directory-title">YOUR PROJECTS. <em>ALWAYS GROWING.</em></h2><p>Only your published projects appear here. Unused bushes remain part of the glowing tree artwork.</p></div><div class="search-wrap"><label for="search-projects">SEARCH THE NETWORK</label><input id="search-projects" type="search" placeholder="Search projects or work…" autocomplete="off"></div></div>
+      <div class="directory-header"><div><p class="section-eyebrow">// CANOPY DIRECTORY</p><h2 id="directory-title">YOUR PROJECTS. <em>ALWAYS GROWING.</em></h2><p>Explore your projects, open finished websites, view repositories, and read published code previews. Unused bushes stay hidden.</p></div><div class="search-wrap"><label for="search-projects">SEARCH THE NETWORK</label><input id="search-projects" type="search" placeholder="Search projects or work…" autocomplete="off"></div></div>
       <div class="sector-grid" id="sector-grid"></div>
       <p class="directory-note">Future work stays invisible until you add it through Manage Tree. Each of the six branches can hold multiple projects.</p>
     </section>
@@ -89,8 +89,26 @@
           <div class="form-row"><label>CATEGORY <input id="field-category" maxlength="35" placeholder="Web, Design, AI, ..." required></label><label>STATUS <input id="field-status" maxlength="35" placeholder="Building"></label></div>
           <label>DESCRIPTION <textarea id="field-description" maxlength="800" rows="3" placeholder="What does it do?"></textarea></label>
           <div class="form-row"><label>YEAR <input id="field-year" maxlength="12" placeholder="2026"></label><label>TAGS (COMMA-SEPARATED) <input id="field-tags" maxlength="450" placeholder="HTML, CSS, JavaScript"></label></div>
-          <label>GITHUB REPOSITORY URL (OPTIONAL) <input id="field-repo" type="url" placeholder="https://github.com/..."></label>
-          <label>LIVE WEBSITE URL (OPTIONAL) <input id="field-live" type="url" placeholder="https://..."></label>
+          <fieldset class="project-publish-fields">
+            <legend>PUBLIC LINKS & CODE PREVIEW</legend>
+            <p>All fields are optional. Only publish links and code you want visitors to see.</p>
+            <label>FINISHED PROJECT / LIVE WEBSITE URL
+              <input id="field-live" type="url" inputmode="url" placeholder="https://your-finished-project.example/">
+            </label>
+            <label>PUBLIC SOURCE CODE / REPOSITORY URL
+              <input id="field-repo" type="url" inputmode="url" placeholder="https://github.com/username/repository">
+            </label>
+            <label>CODE PREVIEW LANGUAGE
+              <select id="field-code-language">
+                <option>Text</option><option>PHP</option><option>JavaScript</option><option>TypeScript</option>
+                <option>HTML</option><option>CSS</option><option>Python</option><option>SQL</option>
+                <option>JSON</option><option>Bash</option><option>Java</option><option>C#</option>
+              </select>
+            </label>
+            <label>CODE PREVIEW — PASTE AN OPTIONAL EXCERPT (MAX 6000 CHARACTERS)
+              <textarea id="field-code-preview" rows="9" maxlength="6000" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Paste a short snippet that demonstrates your project. Do not include passwords, API keys, or private code."></textarea>
+            </label>
+          </fieldset>
           <div class="form-actions"><button type="submit" class="full-button">SAVE LEAF</button><button type="button" class="danger-button" id="editor-delete" hidden>REMOVE</button></div>
           <p id="editor-message" class="editor-message" role="status"></p>
         </form>

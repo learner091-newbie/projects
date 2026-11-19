@@ -27,7 +27,8 @@
     name:trim(p.name,80),type:p.type==='Work'?'Work':'Project',category:trim(p.category||'Other',35),
     status:trim(p.status||'Building',35),year:trim(p.year,12),description:trim(p.description,800),
     tags:Array.isArray(p.tags)?p.tags.slice(0,12).map(s=>trim(s,36)).filter(Boolean):[],
-    repoUrl:httpUrl(p.repoUrl),liveUrl:httpUrl(p.liveUrl)
+    repoUrl:httpUrl(p.repoUrl),liveUrl:httpUrl(p.liveUrl),
+    codeLanguage:trim(p.codeLanguage||'Text',30),codePreview:String(p.codePreview??'').slice(0,6000)
   });
   const defaults = () => (Array.isArray(published.projects)?published.projects:[]).map(normalize).filter(p=>p.name);
   let projects=defaults();
@@ -82,6 +83,43 @@
   }
   function link(parent,text,url){if(!httpUrl(url))return;const a=append('a',parent,text,'inspector-link');a.href=url;a.target='_blank';a.rel='noopener noreferrer';}
   function addButton(parent,label,zoneId){const b=append('button',parent,label,'inspector-add');b.type='button';b.addEventListener('click',()=>openEditor(null,zoneId));}
+  function previewModule(parent,p,inspector=false){
+    const module=append('section',parent,null,'code-module'+(inspector?' in-inspector':''));
+    const header=append('div',module,null,'code-module-header');
+    append('span',header,'⌘ CODE PREVIEW');
+    append('span',header,p.codePreview ? (p.codeLanguage||'Text').toUpperCase() : 'NOT PUBLISHED','code-language');
+    if(p.codePreview){
+      // All user-entered code is inserted with textContent, never innerHTML.
+      const details=append('details',module,null,'code-details');details.open=true;
+      const summary=append('summary',details,'VIEW CODE SNIPPET');summary.title='Collapse or expand code preview';
+      const pre=append('pre',details,null,'code-preview');
+      const code=append('code',pre);code.textContent=p.codePreview;
+      const copy=append('button',details,'COPY CODE','code-copy');copy.type='button';
+      copy.addEventListener('click',async()=>{
+        try{await navigator.clipboard.writeText(p.codePreview);copy.textContent='COPIED ✓';}
+        catch{
+          const selection=window.getSelection();const range=document.createRange();range.selectNodeContents(code);selection.removeAllRanges();selection.addRange(range);
+          copy.textContent='SELECTED — CTRL+C';
+        }
+      });
+    } else {
+      append('p',module,'Code snippet space is ready. Add your own preview in Manage Tree.','code-empty');
+    }
+    return module;
+  }
+  function projectLinks(parent,p){
+    const panel=append('div',parent,null,'project-urls');
+    const addTile=(caption,url,action)=>{
+      const safe=httpUrl(url);
+      const tile=append(safe?'a':'div',panel,null,'project-url-tile'+(safe?' is-linked':' is-pending'));
+      append('span',tile,caption,'url-caption');
+      append('span',tile,safe?action:'NOT ADDED YET','url-action');
+      if(safe){tile.href=safe;tile.target='_blank';tile.rel='noopener noreferrer';tile.title=safe;}
+    };
+    addTile('FINISHED PROJECT URL',p.liveUrl,'↗ OPEN WEBSITE');
+    addTile('SOURCE CODE URL',p.repoUrl,'↗ VIEW REPOSITORY');
+    return panel;
+  }
   function renderInspector(){
     const content=$('inspector-body');content.replaceChildren();
     let items=countIn(selectedZone);
@@ -103,6 +141,7 @@
     const row2=append('div',box,null,'data-row');append('span',row2,'TYPE / YEAR');append('span',row2,`${p.type} · ${p.year||'—'}`);
     const tags=append('div',box,null,'tag-wrap');p.tags.forEach(t=>append('span',tags,t));
     link(box,'↗ VIEW REPOSITORY',p.repoUrl);link(box,'↗ VISIT LIVE WEBSITE',p.liveUrl);
+    if(p.codePreview)previewModule(box,p,true);
     if(items.length>1){
       append('span',box,`BUSH ITEMS / ${items.length}`,'inspector-index');
       const picker=append('div',box,null,'project-picker');items.forEach(item=>{
@@ -121,16 +160,24 @@
     const container=$('sector-grid');container.replaceChildren();
     zones.forEach(z=>{
       const items=countIn(z.id);
-      // Public directory must show only real work, never an empty branch.
+      // Empty branches remain completely invisible in the public directory.
       if(!items.length)return;
       const filtered=items.filter(p=>[p.name,p.description,p.category,p.type,...p.tags].join(' ').toLowerCase().includes(search));
       if(!filtered.length)return;
       const card=append('article',container,null,'sector-card');
-      const header=append('div',card,null,'sector-card-header');append('span',header,`BRANCH // ${pad(z.id)}`);append('span',header,'◉ ACTIVE','sector-state');
+      const header=append('div',card,null,'sector-card-header');
+      append('span',header,`BRANCH // ${pad(z.id)}`);append('span',header,'◉ ACTIVE','sector-state');
       append('h3',card,items.length===1?items[0].name:`${items.length} CONNECTED ITEMS`);
       append('p',card,`${z.label} • ${items.length} ${items.length===1?'project/work item':'project/work items'}`);
-      filtered.forEach(item=>{const b=append('button',card,item.name,'sector-card-item');b.type='button';append('small',b,`${item.type} / ${item.status}`);b.addEventListener('click',()=>selectZone(z.id,item.id,true));});
-      // Editing and adding are intentionally kept in Manage Tree, not on public cards.
+      filtered.forEach(item=>{
+        const project=append('section',card,null,'project-entry');
+        const heading=append('button',project,null,'project-heading');heading.type='button';
+        append('strong',heading,item.name);append('small',heading,`${item.type} / ${item.status}`);
+        heading.title=`Inspect ${item.name} on the tree`;
+        heading.addEventListener('click',()=>selectZone(z.id,item.id,true));
+        projectLinks(project,item);
+        previewModule(project,item);
+      });
     });
     if(!container.children.length)append('p',container,search?'No matching projects or work. Try another search.':'Projects will appear here when added through Manage Tree.','directory-note');
   }
@@ -144,13 +191,13 @@
 
   // Local editor: anyone may preview edits, but publishing requires repository write access.
   const dialog=$('editor'),form=$('editor-form');
-  const fields={name:'field-name',zone:'field-zone',type:'field-type',category:'field-category',status:'field-status',description:'field-description',year:'field-year',tags:'field-tags',repoUrl:'field-repo',liveUrl:'field-live'};
+  const fields={name:'field-name',zone:'field-zone',type:'field-type',category:'field-category',status:'field-status',description:'field-description',year:'field-year',tags:'field-tags',repoUrl:'field-repo',liveUrl:'field-live',codeLanguage:'field-code-language',codePreview:'field-code-preview'};
   const zoneOptions=$('field-zone');zones.forEach(z=>{const o=append('option',zoneOptions,`${pad(z.id)} — ${z.label}`);o.value=z.id;});
   const set = (key,value) => {$(fields[key]).value=value??'';};
   function fill(projectId=null,zoneId=selectedZone){
     editId=projectId;
     const p=projects.find(item=>item.id===projectId);
-    set('name',p?.name||'');set('zone',p?.zone||zoneId);set('type',p?.type||'Project');set('category',p?.category||'Web');set('status',p?.status||'Building');set('year',p?.year||String(new Date().getFullYear()));set('description',p?.description||'');set('tags',p?.tags?.join(', ')||'');set('repoUrl',p?.repoUrl||'');set('liveUrl',p?.liveUrl||'');
+    set('name',p?.name||'');set('zone',p?.zone||zoneId);set('type',p?.type||'Project');set('category',p?.category||'Web');set('status',p?.status||'Building');set('year',p?.year||String(new Date().getFullYear()));set('description',p?.description||'');set('tags',p?.tags?.join(', ')||'');set('repoUrl',p?.repoUrl||'');set('liveUrl',p?.liveUrl||'');set('codeLanguage',p?.codeLanguage||'Text');set('codePreview',p?.codePreview||'');
     $('editor-delete').hidden=!p;renderManagerList();message('');
   }
   function renderManagerList(){
@@ -167,10 +214,10 @@
   form.addEventListener('submit',e=>{
     e.preventDefault();
     const name=trim($('field-name').value,80),category=trim($('field-category').value,35);
-    const repo=$('field-repo').value,live=$('field-live').value;
+    const repo=$('field-repo').value,live=$('field-live').value,codePreview=$('field-code-preview').value;
     if(!name||!category){message('Please enter a name and category.');return;}
     if(!preventInvalid(repo)||!preventInvalid(live)){message('Links must be valid HTTP or HTTPS URLs.');return;}
-    const data=normalize({id:editId||slug(name),name,zone:Number($('field-zone').value),type:$('field-type').value,category,status:$('field-status').value,year:$('field-year').value,description:$('field-description').value,tags:$('field-tags').value.split(',').map(s=>s.trim()).filter(Boolean),repoUrl:repo,liveUrl:live});
+    const data=normalize({id:editId||slug(name),name,zone:Number($('field-zone').value),type:$('field-type').value,category,status:$('field-status').value,year:$('field-year').value,description:$('field-description').value,tags:$('field-tags').value.split(',').map(s=>s.trim()).filter(Boolean),repoUrl:repo,liveUrl:live,codeLanguage:$('field-code-language').value,codePreview});
     if(editId){const ix=projects.findIndex(p=>p.id===editId);if(ix>=0)projects[ix]=data;else projects.push(data);}else projects.push(data);
     selectedZone=data.zone;selectedId=data.id;editId=data.id;
     const saved=persist();update();fill(data.id,data.zone);

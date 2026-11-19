@@ -20,3 +20,38 @@
 .zone-node.is-selected{border-color:var(--mint)}
 @media(max-width:600px){.sector-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:380px){.sector-grid{grid-template-columns:1fr}}
+
+/* V5: per-project links and code-preview modules. No empty project branches are shown. */
+.sector-grid{max-width:1200px;grid-template-columns:repeat(auto-fit,minmax(min(100%,410px),1fr));gap:18px;align-items:start}
+.sector-card{padding:22px;min-width:0}
+.sector-card h3{margin:25px 0 6px;font-size:21px}
+.sector-card>p{margin-bottom:18px}
+.project-entry{padding:16px;background:linear-gradient(155deg,#07162fcf,#09102db8);border:1px solid rgba(77,238,234,.17);border-radius:6px;min-width:0;margin-top:13px}
+.project-heading{display:flex;flex-direction:column;gap:7px;width:100%;text-align:left;border:0;border-bottom:1px solid #4deeea24;background:transparent;color:var(--text);padding:0 0 14px;cursor:pointer}
+.project-heading strong{font-size:14px;font-weight:850}
+.project-heading small{color:var(--muted);font:700 10px var(--font-tech)}
+.project-heading:hover strong{color:var(--cyan)}
+.project-urls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.project-url-tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:9px;min-height:75px;border:1px solid #4deeea33;background:rgba(9,33,58,.63);border-radius:5px;padding:11px 10px;overflow-wrap:anywhere}
+.project-url-tile .url-caption{font:800 9px/1.5 var(--font-tech);letter-spacing:.4px;color:#96c4d8}
+.project-url-tile .url-action{font:800 10px/1.5 var(--font-tech);color:var(--cyan)}
+.project-url-tile.is-pending{border-style:dashed;border-color:#41678388;background:#07142980}
+.project-url-tile.is-pending .url-action{color:#68899f;font-weight:700}
+.project-url-tile.is-linked{transition:background .2s,box-shadow .2s,border-color .2s}
+.project-url-tile.is-linked:hover{background:rgba(0,255,156,.09);border-color:var(--mint);box-shadow:0 0 20px #00ff9c15}
+.code-module{min-width:0;background:#040e22;border:1px solid #35d4db44;border-radius:5px;overflow:hidden}
+.code-module-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 12px;font:800 10px var(--font-tech);letter-spacing:.8px;color:var(--mint);border-bottom:1px solid #4deeea22}
+.code-module .code-language{font-size:9px;color:#729fb3;text-align:right;letter-spacing:0;overflow-wrap:anywhere}
+.code-module p.code-empty{font:11px/1.7 var(--font-tech);color:#769caf;margin:0;padding:15px 12px;min-height:74px}
+.code-details summary{padding:10px 12px;color:#86b8c9;font:800 9px var(--font-tech);cursor:pointer;list-style:inside}
+.code-details summary:hover{color:var(--mint)}
+.code-preview{overflow:auto;max-height:240px;white-space:pre;tab-size:2;margin:0 10px 10px;padding:14px 13px;font:12px/1.7 "Cascadia Code",Consolas,monospace;color:#c3fff0;background:linear-gradient(160deg,#05101b,#071d29);border:1px solid #184854;border-radius:3px;overscroll-behavior:contain}
+.code-copy{font:800 9px var(--font-tech);margin:0 10px 12px;display:inline-block;border:1px solid #48c5c9;background:#092d3d;color:var(--cyan);padding:8px 10px;border-radius:3px}
+.code-copy:hover{background:#0b4752}
+.code-module.in-inspector{margin-top:18px}.code-module.in-inspector .code-preview{font-size:10px}
+.project-publish-fields{min-width:0;margin:10px 0 0;padding:17px;border:1px solid #4deeea4f;border-radius:6px;display:grid;gap:14px;background:rgba(15,48,67,.18)}
+.project-publish-fields legend{color:var(--mint);font:800 11px var(--font-tech);letter-spacing:.6px;padding:0 8px}
+.project-publish-fields>p{font-size:11px;color:#8dafc3;line-height:1.6;margin:0}
+#field-code-preview{min-height:160px;resize:vertical;font:12px/1.55 "Cascadia Code",Consolas,monospace;white-space:pre;tab-size:2}
+@media(max-width:690px){.sector-grid{grid-template-columns:1fr;max-width:580px}.sector-card{padding:18px}.sector-card h3{font-size:20px}}
+@media(max-width:380px){.project-urls{grid-template-columns:1fr}.project-url-tile{min-height:58px}.sector-card{padding:14px}}
