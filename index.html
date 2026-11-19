@@ -1,118 +1,102 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#070b18" />
-  <meta name="description" content="SD8 — a living interactive tree of my projects and work." />
-  <title>SD8 // Cyber Project Tree</title>
-  <link rel="icon" href="sd8-logo.png" type="image/png" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0B0B3B">
+  <meta name="description" content="SD8 — an interactive neon-powered portfolio tree with six beautiful branches and only real project labels.">
+  <title>SD8 // The Living Cyber Tree</title>
+  <link rel="icon" href="sd8-logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <script src="projects.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="ambient ambient--one" aria-hidden="true"></div>
-  <div class="ambient ambient--two" aria-hidden="true"></div>
-  <div class="site-wrap">
-    <header class="topbar">
-      <a class="brand" href="#top" aria-label="SD8 project tree home">
-        <span class="brand-logo" aria-hidden="true"><img src="sd8-logo.png" alt="" /></span>
-        <span><strong>SD8<span class="brand-dot">.</span>PROJECTS</strong><small>THE LIVING PROJECT NETWORK</small></span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#atlas">THE TREE</a>
-        <a href="#projects">PROJECTS</a>
-        <a class="nav-manage" href="#manage" id="nav-manage">MANAGE LEAVES</a>
-        <a class="nav-contact" id="header-github" href="https://github.com/learner091-newbie" target="_blank" rel="noopener noreferrer">GITHUB <span aria-hidden="true">↗</span></a>
-      </nav>
-    </header>
+  <div class="background-grid" aria-hidden="true"></div>
+  <div class="nebula nebula-one" aria-hidden="true"></div>
+  <div class="nebula nebula-two" aria-hidden="true"></div>
+  <header class="site-header" id="top">
+    <a class="identity" href="#top" aria-label="SD8 project portfolio home">
+      <img src="sd8-logo.png" alt="" class="identity-logo">
+      <span><strong>SD<span class="eight">8</span> <em>NETWORK</em></strong><small>THE LIVING PROJECT TREE</small></span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#tree">THE TREE</a>
+      <a href="#directory">PROJECTS & WORK</a>
+      <button class="nav-manage" id="manage-open" type="button">+ MANAGE TREE</button>
+    </nav>
+    <a id="github-profile" href="https://github.com/learner091-newbie" target="_blank" rel="noopener noreferrer" class="github-link">GITHUB <span aria-hidden="true">↗</span></a>
+  </header>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot"></span> SYSTEM ONLINE <span class="eyebrow-sep">/</span> IDEAS IN MOTION</div>
-          <h1 id="hero-title">EVERY PROJECT<br/>STARTS AS <span>A SPARK.</span></h1>
-          <p>A living network of things I build, break, and bring to life. Every glowing leaf is a project. Explore the branches to discover the story behind each one.</p>
-          <div class="hero-actions">
-            <a href="#atlas" class="btn btn-primary">EXPLORE THE TREE <span aria-hidden="true">↘</span></a>
-            <a id="hero-github" href="https://github.com/learner091-newbie" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">GITHUB PROFILE <span aria-hidden="true">↗</span></a>
-          </div>
+  <main>
+    <div class="dashboard" id="tree">
+      <aside class="intro-panel">
+        <div class="eyebrow"><span class="status-light"></span> SYSTEM // ONLINE</div>
+        <p class="intro-number">THE SD8 ECOSYSTEM <span>01 / ∞</span></p>
+        <h1>IDEAS TAKE <span>ROOT.</span><br>CODE GIVES THEM <em>LIFE.</em></h1>
+        <p class="intro-description">A living digital tree, powered from the SD8 core. Six neon-powered branches grow from the SD8 core. Your projects appear only when you add them.</p>
+        <a class="explore-link" href="#directory">EXPLORE THE TREE <span aria-hidden="true">↘</span></a>
+        <div class="system-stats">
+          <div><strong>06</strong><span>ENERGY BRANCHES</span></div>
+          <div><strong id="project-total">02</strong><span>PROJECTS & WORK</span></div>
         </div>
-        <div class="hero-radar" aria-hidden="true"><div class="radar-ring ring-one"></div><div class="radar-ring ring-two"></div><div class="radar-ring ring-three"></div><div class="radar-orbit orbit-one"></div><div class="radar-orbit orbit-two"></div><div class="radar-core radar-core-logo"><img src="sd8-logo.png" alt="" /><small>SD8 // INFINITE GROWTH</small></div><span class="radar-label rl-one">01 // BUILD</span><span class="radar-label rl-two">02 // LEARN</span><span class="radar-label rl-three">03 // EVOLVE</span></div>
-      </section>
+        <div class="power-panel"><div class="power-heading"><span>CORE ENERGY</span><b>LIVE <span class="status-light"></span></b></div><div class="power-gauge"><span></span></div><p>Magenta data pulses flow from the SD8 root into every connected bush cluster.</p></div>
+      </aside>
 
-      <section class="metrics" aria-label="Portfolio overview">
-        <div><span class="metric-index">01 / NODES</span><strong id="metric-projects">02</strong><small>PROJECTS & WORK</small></div>
-        <div><span class="metric-index">02 / SECTORS</span><strong id="metric-categories">01</strong><small>DOMAINS EXPLORED</small></div>
-        <div><span class="metric-index">03 / SIGNAL</span><strong class="metric-word">ACTIVE<span class="pulse-dot"></span></strong><small>ALWAYS EVOLVING</small></div>
-      </section>
-
-      <section class="atlas-section" id="atlas" aria-labelledby="atlas-title">
-        <div class="section-head">
-          <div><span class="section-kicker">// INTERACTIVE TOPOLOGY</span><h2 id="atlas-title">THE PROJECT <em>TREE.</em></h2><p>Choose a leaf. Follow a branch. Every idea has somewhere to grow.</p></div>
-          <div class="section-meta"><span>SD8 NETWORK</span><strong><span class="live-dot"></span> CONNECTED</strong></div>
+      <section class="visual-panel" aria-label="Interactive six-branch cyber tree">
+        <div class="visual-header"><span><span class="tiny-square"></span> SD8 // CYBER CANOPY</span><span>06 BRANCHES <span class="mint-dot">●</span></span></div>
+        <div class="tree-scene" id="tree-scene">
+          <img src="cyber-tree-art.webp" alt="A majestic neon cyber tree with cyan branches, mint holographic bushes and magenta energy rising from its SD8 root" class="tree-art" fetchpriority="high">
+          <svg class="energy-network" viewBox="0 0 941 1672" aria-hidden="true" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="energy-grad" x1="0" y1="1" x2=".5" y2="0"><stop offset="0" stop-color="#FF10F0"/><stop offset=".56" stop-color="#fa57ff"/><stop offset="1" stop-color="#00FF9C"/></linearGradient>
+              <filter id="electric-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <g id="energy-lines"></g>
+          </svg>
+          <div class="zone-nodes" id="zone-nodes" aria-label="Choose a project on the six-branch cyber tree"></div>
+          <div class="root-pulse" aria-hidden="true"></div>
+          <span class="root-caption" aria-hidden="true">SD8 // POWER SOURCE</span>
+          <div class="floating-label fl-a" aria-hidden="true">DATA STREAM : 0x8F</div>
+          <div class="floating-label fl-b" aria-hidden="true">GROWTH PROTOCOL ACTIVE</div>
         </div>
-        <div class="workbench">
-          <div class="tree-panel" id="tree-panel">
-            <div class="panel-toolbar"><div class="panel-heading"><span class="tiny-square"></span> SD8_TREE_VISUALIZER <span class="muted-label">// LIVE</span></div><div class="toolbar-right"><span class="key">◇</span> CLICK LEAVES TO INSPECT <span class="count-pill" id="node-counter">02 NODES</span></div></div>
-            <div class="tree-scroll" tabindex="0" aria-label="Interactive project tree. Scroll horizontally on narrow screens.">
-              <svg id="tree-svg" viewBox="0 0 1000 700" role="img" aria-label="Interactive futuristic tree with project leaves" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="trunk-grad" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#136f85"/><stop offset="55%" stop-color="#28d9e9"/><stop offset="100%" stop-color="#6b59ef"/></linearGradient>
-                  <linearGradient id="leaf-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#172842"/><stop offset="100%" stop-color="#101528"/></linearGradient>
-                  <linearGradient id="vein" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#6b5af7"/><stop offset="100%" stop-color="#20e8ee"/></linearGradient>
-                  <filter id="tree-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                  <filter id="leaf-glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-                  <clipPath id="sd8-root-clip"><circle cx="500" cy="624" r="23"/></clipPath>
-                  <pattern id="grid-pattern" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" stroke="#1b3550" stroke-width=".75" fill="none" opacity=".45"/></pattern>
-                </defs>
-                <rect width="1000" height="700" fill="url(#grid-pattern)" opacity=".42"/>
-                <g id="star-field"></g>
-                <g opacity=".46" fill="none" stroke="#2a516d"><circle cx="500" cy="335" r="225" stroke-dasharray="4 12"/><circle cx="500" cy="335" r="340" stroke-dasharray="2 16"/><path d="M40 565H960M500 0V700" stroke-dasharray="3 14" opacity=".35"/></g>
-                <g id="tree-branches"></g>
-                <g class="tree-base"><path d="M500 655 C488 587 509 535 495 471 C484 426 510 371 499 306" stroke="#1e6d87" stroke-width="30" stroke-linecap="round" opacity=".13" filter="url(#tree-glow)" fill="none"/><path d="M500 655 C488 587 509 535 495 471 C484 426 510 371 499 306" stroke="url(#trunk-grad)" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M498 645 L466 679 M500 642 L534 679 M500 635L500 685" stroke="#27c9d7" stroke-width="2" opacity=".68"/></g>
-                <g id="tree-leaves"></g>
-                <g class="root-emblem"><circle cx="500" cy="624" r="37" fill="#070f22" stroke="#2ac9de" stroke-width="1.5"/><circle cx="500" cy="624" r="27" fill="none" stroke="#6c59d3" stroke-dasharray="3 6"/><image href="sd8-logo.png" x="477" y="601" width="46" height="46" preserveAspectRatio="xMidYMid slice" clip-path="url(#sd8-root-clip)" /><text x="500" y="677" font-size="12" text-anchor="middle" fill="#7394af" letter-spacing="3">SD8 // ORIGIN</text></g>
-              </svg>
-            </div>
-            <div class="panel-footer"><span>◉ ENCRYPTED AESTHETIC / OPEN EXPLORATION</span><span class="mobile-hint">↔ SCROLL TO EXPLORE</span><span>V 2.0.0</span></div>
-          </div>
-
-          <aside class="inspector" aria-live="polite" aria-labelledby="inspector-title"><div class="inspector-top"><span class="tiny-square"></span><span id="inspector-title">NODE INSPECTOR</span><span class="inspector-cross">✳</span></div><div id="inspector-content"></div></aside>
-        </div>
+        <div class="visual-footer"><span>◉ SIGNAL ROUTED FROM SD8 CORE</span><span>NEON TREE // V4.0</span></div>
       </section>
 
-      <section class="projects-section" id="projects" aria-labelledby="projects-title"><div class="section-head"><div><span class="section-kicker">// DIRECTORY</span><h2 id="projects-title">PROJECTS <em>& WORK.</em></h2><p>Explore by category or search through the growing archive. New leaves can be added any time.</p></div></div>
-        <div class="filter-bar"><div id="category-filters" class="filters" role="group" aria-label="Filter projects by category"></div><label class="search"><span aria-hidden="true">⌕</span><input id="project-search" type="search" placeholder="SEARCH PROJECTS..." aria-label="Search projects" autocomplete="off" /></label></div>
-        <div id="project-grid" class="project-grid"></div>
-        <p id="empty-state" class="empty-state" hidden>No projects matched your search. Try another category or keyword.</p>
-      </section>
-      <section class="outro"><div><span class="section-kicker">// CONNECTION ESTABLISHED</span><h2>THE NEXT LEAF<br/>IS <em>YOURS TO ADD.</em></h2><p>Code is how ideas become things. This tree is a snapshot, not the finish line.</p></div><a id="footer-github" href="https://github.com/learner091-newbie" class="btn btn-primary" target="_blank" rel="noopener noreferrer">EXPLORE MY GITHUB <span aria-hidden="true">↗</span></a></section>
-    </main>
-    <footer class="footer"><span>© <span id="copyright-year"></span> <span id="footer-name">SD8</span></span><span>DESIGNED TO KEEP GROWING ✳</span><a href="#top">BACK TO TOP ↑</a></footer>
-  </div>
-  <dialog id="manager" class="manager-dialog" aria-labelledby="manager-title">
-    <div class="manager-shell">
-      <div class="manager-header"><div><span class="section-kicker">// LOCAL EDITOR</span><h2 id="manager-title">MANAGE <em>LEAVES.</em></h2></div><button id="manager-close" class="manager-close" type="button" aria-label="Close manager">✕</button></div>
-      <p class="manager-note">Add, edit, and remove projects or work. Changes are saved only in <strong>this browser</strong> until you export and upload <code>projects.js</code> to GitHub. Visitors cannot edit your published site.</p>
-      <div class="manager-grid">
-        <div class="manager-items"><div class="manager-actions"><strong>YOUR LEAVES</strong><button id="manager-add" type="button" class="manager-btn">+ NEW LEAF</button></div><div id="manager-list" class="manager-list"></div></div>
-        <form id="project-form" class="manager-form">
-          <input type="hidden" id="edit-id" />
-          <label>NAME <input id="edit-name" maxlength="80" required placeholder="Project or work title" /></label>
-          <div class="form-columns"><label>TYPE <select id="edit-type"><option>Project</option><option>Work</option></select></label><label>CATEGORY <input id="edit-category" maxlength="35" required placeholder="Web, Design, Research…" /></label></div>
-          <div class="form-columns"><label>STATUS <input id="edit-status" maxlength="35" placeholder="Building, Complete…" /></label><label>YEAR <input id="edit-year" maxlength="12" placeholder="2026" /></label></div>
-          <label>DESCRIPTION <textarea id="edit-description" rows="3" maxlength="800" placeholder="What did you build or work on?"></textarea></label>
-          <label>TAGS <input id="edit-tags" maxlength="300" placeholder="HTML, CSS, JavaScript (comma-separated)" /></label>
-          <label>GITHUB REPO URL <input id="edit-repo" type="url" placeholder="https://github.com/... (optional)" /></label>
-          <label>LIVE WEBSITE URL <input id="edit-live" type="url" placeholder="https://... (optional)" /></label>
-          <div class="form-buttons"><button type="submit" class="btn btn-primary">SAVE LEAF ✓</button><button type="button" id="manager-delete" class="manager-btn manager-danger">REMOVE</button></div>
+      <aside class="details-panel" id="inspector" aria-live="polite">
+        <div class="details-heading"><span class="tiny-square"></span> BRANCH INSPECTOR <span class="star-icon">✳</span></div>
+        <div id="inspector-body"></div>
+        <div class="details-end"><span class="status-light"></span> SIX BRANCHES · UNLIMITED PROJECTS</div>
+      </aside>
+    </div>
+
+    <section class="directory" id="directory" aria-labelledby="directory-title">
+      <div class="directory-header"><div><p class="section-eyebrow">// CANOPY DIRECTORY</p><h2 id="directory-title">YOUR PROJECTS. <em>ALWAYS GROWING.</em></h2><p>Only your published projects appear here. Unused bushes remain part of the glowing tree artwork.</p></div><div class="search-wrap"><label for="search-projects">SEARCH THE NETWORK</label><input id="search-projects" type="search" placeholder="Search projects or work…" autocomplete="off"></div></div>
+      <div class="sector-grid" id="sector-grid"></div>
+      <p class="directory-note">Future work stays invisible until you add it through Manage Tree. Each of the six branches can hold multiple projects.</p>
+    </section>
+    <footer><div class="footer-mark"><img src="sd8-logo.png" alt="" /><span>MADE TO GROW. <small>SD8 // PROJECT NETWORK</small></span></div><p>ROOTED IN CURIOSITY. POWERED BY CODE.</p><a href="#top">BACK TO CORE ↑</a></footer>
+  </main>
+
+  <dialog class="editor" id="editor" aria-labelledby="editor-title">
+    <div class="editor-shell">
+      <div class="editor-title"><div><p class="section-eyebrow">// LOCAL EDITOR</p><h2 id="editor-title">MANAGE YOUR <em>CANOPY.</em></h2><p>These edits affect only this browser until you export <code>projects.js</code> and upload it to GitHub.</p></div><button class="icon-button" id="editor-close" type="button" aria-label="Close project manager">×</button></div>
+      <div class="editor-layout">
+        <div class="editor-list-panel"><button type="button" class="full-button" id="editor-add">+ ADD A PROJECT / WORK</button><div id="editor-list" class="editor-list"></div></div>
+        <form id="editor-form" class="editor-form">
+          <label>PROJECT / WORK NAME <input id="field-name" required maxlength="80" placeholder="My new project"></label>
+          <div class="form-row"><label>SECTOR / BUSH <select id="field-zone" required></select></label><label>ENTRY TYPE <select id="field-type"><option>Project</option><option>Work</option></select></label></div>
+          <div class="form-row"><label>CATEGORY <input id="field-category" maxlength="35" placeholder="Web, Design, AI, ..." required></label><label>STATUS <input id="field-status" maxlength="35" placeholder="Building"></label></div>
+          <label>DESCRIPTION <textarea id="field-description" maxlength="800" rows="3" placeholder="What does it do?"></textarea></label>
+          <div class="form-row"><label>YEAR <input id="field-year" maxlength="12" placeholder="2026"></label><label>TAGS (COMMA-SEPARATED) <input id="field-tags" maxlength="450" placeholder="HTML, CSS, JavaScript"></label></div>
+          <label>GITHUB REPOSITORY URL (OPTIONAL) <input id="field-repo" type="url" placeholder="https://github.com/..."></label>
+          <label>LIVE WEBSITE URL (OPTIONAL) <input id="field-live" type="url" placeholder="https://..."></label>
+          <div class="form-actions"><button type="submit" class="full-button">SAVE LEAF</button><button type="button" class="danger-button" id="editor-delete" hidden>REMOVE</button></div>
+          <p id="editor-message" class="editor-message" role="status"></p>
         </form>
       </div>
-      <div class="manager-bottom"><span id="manager-message" role="status">Edits preview immediately on this device.</span><div class="manager-bottom-actions"><button id="manager-reset" type="button" class="manager-btn">RESET LOCAL EDITS</button><button id="manager-export" type="button" class="btn btn-primary">EXPORT projects.js ↓</button></div></div>
+      <div class="editor-bottom"><button type="button" id="editor-reset" class="reset-button">RESET LOCAL CHANGES</button><button type="button" id="editor-export" class="export-button">↓ EXPORT projects.js FOR GITHUB</button></div>
     </div>
   </dialog>
-  <script src="projects.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
